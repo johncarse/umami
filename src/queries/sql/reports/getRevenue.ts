@@ -74,8 +74,8 @@ async function relationalQuery(
     `
     select
       session.country as name,
-      sum(revenue) value
-    from revenue 
+      sum(revenue) AS value
+    from revenue
     ${joinQuery}
     join session 
       on session.website_id = revenue.website_id

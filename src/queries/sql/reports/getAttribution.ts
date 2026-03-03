@@ -52,8 +52,8 @@ async function relationalQuery(
   function getUTMQuery(utmColumn: string) {
     return `
     select 
-        coalesce(we.${utmColumn}, '') name,
-        ${currency ? 'sum(e.value)' : 'count(distinct we.session_id)'} value
+        coalesce(we.${utmColumn}, '') AS name,
+        ${currency ? 'sum(e.value)' : 'count(distinct we.session_id)'} AS value
     from model m
     join website_event we
     on we.created_at = m.created_at
@@ -84,7 +84,7 @@ async function relationalQuery(
         select
           revenue.session_id,
           max(revenue.created_at) max_dt,
-          sum(revenue.revenue) value
+          sum(revenue.revenue) AS value
         from revenue
         join website_event
           on website_event.website_id = revenue.website_id
@@ -128,8 +128,8 @@ async function relationalQuery(
     `
     ${currency ? revenueEventQuery : eventQuery}
     ${getModelQuery(model)}
-    select coalesce(we.referrer_domain, '') name,
-        ${currency ? 'sum(e.value)' : 'count(distinct we.session_id)'} value
+    select coalesce(we.referrer_domain, '') AS name,
+        ${currency ? 'sum(e.value)' : 'count(distinct we.session_id)'} AS value
     from model m
     join website_event we
     on we.created_at = m.created_at
@@ -166,8 +166,8 @@ async function relationalQuery(
             when coalesce(li_fat_id, '') != '' then 'LinkedIn Ads' 
             when coalesce(twclid, '') != '' then 'Twitter Ads (X)'
             else ''
-          end name,
-        ${currency ? 'sum(e.value)' : 'count(distinct we.session_id)'} value
+          end AS name,
+        ${currency ? 'sum(e.value)' : 'count(distinct we.session_id)'} AS value
     from model m
     join website_event we
     on we.created_at = m.created_at
@@ -178,7 +178,7 @@ async function relationalQuery(
     group by 1
     order by 2 desc
     limit 20)
-    SELECT * 
+    SELECT *
     FROM results
     ${currency ? '' : `WHERE name != ''`}
     `,
