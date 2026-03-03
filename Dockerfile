@@ -1,7 +1,8 @@
 ARG NODE_IMAGE_VERSION="22-alpine"
 
 # Install dependencies only when needed
-FROM node:${NODE_IMAGE_VERSION} AS deps
+# Use BUILDPLATFORM to avoid running Go tools (esbuild, prisma CLI) under emulation
+FROM --platform=$BUILDPLATFORM node:${NODE_IMAGE_VERSION} AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
@@ -10,7 +11,9 @@ RUN npm install -g pnpm
 RUN pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
-FROM node:${NODE_IMAGE_VERSION} AS builder
+# Use BUILDPLATFORM so esbuild and prisma generate run natively (not under QEMU)
+# JS/TS build output is platform-independent; runtime stage installs target-arch Prisma engines
+FROM --platform=$BUILDPLATFORM node:${NODE_IMAGE_VERSION} AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
