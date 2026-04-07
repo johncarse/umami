@@ -53,6 +53,7 @@ export const SESSION_COLUMNS = [
   'country',
   'city',
   'region',
+  'distinctId',
 ];
 
 export const SEGMENT_TYPES = {
@@ -79,6 +80,12 @@ export const FILTER_COLUMNS = {
   event: 'event_name',
   tag: 'tag',
   eventType: 'event_type',
+  distinctId: 'distinct_id',
+  utmSource: 'utm_source',
+  utmMedium: 'utm_medium',
+  utmCampaign: 'utm_campaign',
+  utmContent: 'utm_content',
+  utmTerm: 'utm_term',
 };
 
 export const COLLECTION_TYPE = {

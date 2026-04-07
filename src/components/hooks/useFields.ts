@@ -17,6 +17,12 @@ export function useFields() {
     { name: 'hostname', type: 'string', label: formatMessage(labels.hostname) },
     { name: 'tag', type: 'string', label: formatMessage(labels.tag) },
     { name: 'event', type: 'string', label: formatMessage(labels.event) },
+    { name: 'distinctId', type: 'string', label: formatMessage(labels.distinctId) },
+    { name: 'utmSource', type: 'string', label: formatMessage(labels.utmSource) },
+    { name: 'utmMedium', type: 'string', label: formatMessage(labels.utmMedium) },
+    { name: 'utmCampaign', type: 'string', label: formatMessage(labels.utmCampaign) },
+    { name: 'utmContent', type: 'string', label: formatMessage(labels.utmContent) },
+    { name: 'utmTerm', type: 'string', label: formatMessage(labels.utmTerm) },
   ];
 
   return { fields };

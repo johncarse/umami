@@ -272,6 +272,11 @@ export const labels = defineMessages({
     defaultMessage: 'Triggered event',
   },
   utm: { id: 'label.utm', defaultMessage: 'UTM' },
+  utmSource: { id: 'label.utm-source', defaultMessage: 'UTM Source' },
+  utmMedium: { id: 'label.utm-medium', defaultMessage: 'UTM Medium' },
+  utmCampaign: { id: 'label.utm-campaign', defaultMessage: 'UTM Campaign' },
+  utmContent: { id: 'label.utm-content', defaultMessage: 'UTM Content' },
+  utmTerm: { id: 'label.utm-term', defaultMessage: 'UTM Term' },
   utmDescription: {
     id: 'label.utm-description',
     defaultMessage: 'Track your campaigns through UTM parameters.',
